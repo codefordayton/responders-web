@@ -1,0 +1,88 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+<row align="center">
+<div class="col-sm-12">
+
+
+	<form class="form-inline">
+  		<div class="form-group">
+    		<label for="msg">Message</label>
+    		<textarea type="text" class="form-control" id="msg" placeholder="Type Message" rows="3" ></textarea>
+    	</div>
+		
+ 
+    </form>
+    	<form class="form-inline">
+  		<div class="form-group">
+    		
+    		<textarea type="text" class="form-control" id="map" placeholder="Map Location" rows="3" ></textarea>
+    	</div>
+		
+ 
+    </form>
+	</div>
+</row>
+
+
+
+<row>
+
+<div class="col-sm-12">
+	<div class="col-sm-1">
+		<strong>Category</strong>
+	</div>
+	<div class="col-sm-2">
+		<strong>Name</strong>
+	</div>
+	<div class="col-sm-2">
+		<strong>Phone</strong>
+	</div>
+</div>
+
+</row>
+
+	<row>
+	<div class="col-sm-12">
+	<% @users.each do |user| %>
+	
+	<div class="col-sm-1">
+			<% if(user.category == "physician") %>
+ 				<%= content_tag(:p, "physician", :id=>"physician_id", :class=>"text-uppercase") %>
+			<% elsif(user.category == "nurse") %>
+ 				<%= content_tag(:p, "nurse", :id=>"nurse_id", :class=>"text-uppercase") %>
+ 			<% elsif(user.category == "ems") %>
+ 				<%= content_tag(:p, "ems", :id=>"ems_id", :class=>"text-uppercase") %>
+ 			<% else %>
+ 				<%= content_tag(:p, "unknown", :id=>"unknown_id", :class=>"text-uppercase") %>
+			<% end %>
+ 	</div>
+
+	 		
+		<div class="col-sm-2">
+	  		<%= user.name %>
+		</div>
+		
+		<div class="col-sm-2">
+			<%= user.phone %>
+		</div>
+		
+		<div class="col-sm-1 btn btn-primary">
+			<%= link_to 'Show', user_path(user) %>
+		</div>
+		
+		<div class="col-sm-1 btn btn-warning">
+			<%= link_to 'Edit', edit_user_path(user) %>
+		</div>
+		
+  		<div class="col-sm-1 btn btn-danger">
+			<%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>
+		</div>
+</div>
+	</row>
+
+ <% end %>
+ 
+ <br>
+ <% link_to "Add New User", new_user_path %>
+ </div>
